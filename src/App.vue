@@ -1,8 +1,9 @@
 <template>
 	<div id="app">
 		<h1>Tarefas</h1>
-		<NewTask @taskAdded="addTask($event)" />
-		<TaskGrid :tasks="tasks" /> 
+		<NewTask @taskAdded="addTask" />
+		<TaskGrid @taskDeleted="deleteTask"
+			:tasks="tasks" /> 
 	</div>
 </template>
 
@@ -15,11 +16,7 @@ export default {
 	components: { NewTask, TaskGrid  },
 	data() {
 		return {
-			tasks: [
-				{ name: 'Lavar Louça', pending: false },
-				{ name: 'Varrer a Casa', pending: true },
-				{ name: 'Comprar blusa', pending: false }
-			]
+			tasks: []
 		}
 	},
 	methods: {
@@ -30,6 +27,10 @@ export default {
 				name: task.name, 
 				pending: task.pending || true
 			})
+		},
+		deleteTask(task){
+			const i = this.tasks.indexOf(task)
+			if(i >= 0) this.tasks.splice(i, 1)
 		}
 	}
 }
