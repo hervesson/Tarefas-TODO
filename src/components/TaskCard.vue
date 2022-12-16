@@ -1,6 +1,7 @@
 <template>
-    <div class="task" :class="stateClass">
-        <spam @click="$emit('taskDeleted', task)" class="close">x</spam>
+    <div @click="$emit('taskStateChanged', task)"
+        class="task" :class="stateClass">
+        <spam @click.stop="$emit('taskDeleted', task)" class="close">x</spam>
         <p>{{ task.name }}</p>
     </div>
 </template>
